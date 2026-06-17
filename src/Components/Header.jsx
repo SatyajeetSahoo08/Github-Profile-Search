@@ -4,7 +4,7 @@ const Header = () => {
   return (
     <div
       id="header"
-      className="inline-block text-6xl font-black p-10 text-[#232722]"
+      className="inline-block text-3xl md:text-4xl lg:text-6xl font-black p-4 md:p-6 lg:p-10 text-[#232722]"
       style={{ fontFamily: "'Noto Sans JP', sans-serif" }}
     >
       <h1>DEVELOPER</h1>
