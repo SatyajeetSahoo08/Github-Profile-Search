@@ -1,14 +1,8 @@
 import "react";
 import stamp from "../assets/stamp.jpeg";
-import artwork1 from "../assets/artwork1.jpg";
-import artwork2 from "../assets/artwork2.jpg";
-import artwork3 from "../assets/artwork3.jpg";
-import artwork4 from "../assets/artwork4.jpg";
 
-const ProfileCard = () => {
-    const artworks = [artwork1,artwork2,artwork3,artwork4]
-
-    const artwork = artworks[Math.floor(Math.random() * artworks.length)];
+const ProfileCard = ({userData,currentartwork}) => {
+    
   return (
     <div
       id="profile-card"
@@ -22,7 +16,7 @@ const ProfileCard = () => {
               "polygon(0 0, calc(100% - 15%) 0, 100% 15%, 100% 100%, 0 100%)",
           }}
         >
-            <img src={artwork} alt="img" className="h-full w-full object-cover opacity-60"/>
+            <img src={currentartwork} alt="img" className="h-full w-full object-cover opacity-60"/>
         </div>
       </div>
 
@@ -33,21 +27,21 @@ const ProfileCard = () => {
           </p>
 
           <h2 className="text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-black text-[#232722] leading-tight md:leading-none mt-2">
-            ARCHIVE_GUEST
+            {userData ? userData.login : "ARCHIVE_GUEST"}
           </h2>
 
           <div className="w-[90%] mx-auto border-t border-dashed border-[#7A8273] my-5"></div>
 
-          <div className="space-y-3 text-[#232722] wrap-break-word">
-            <p>◎ github.com/archive_guest</p>
-            <p>✦ linkedin.com/in/archive_guest</p>
-            <p>✉ archive@mail.com</p>
+          <div className="space-y-3 text-[#6D7566] wrap-break-word hover:text-[#4A5645] transition-colors duration-200">
+            <p className="cursor-pointer">◎ <a href={userData.html_url}>Github</a></p>
+            <p className="cursor-pointer">✦ {userData?.blog ? (<a href={userData.blog}>Website</a>) : ( <span>Website Unavailable</span>)} </p>
+            <p className="cursor-default">✉ joined {userData ? new Date(userData.created_at).toLocaleDateString() : "unknown"}</p>
           </div>
         </div>
 
         <div className="flex justify-end md:mt-auto mt-4">
           <div className="w-20 h-20">
-            <img src={stamp} alt="?" className="h-full w-full rounded-lg" />
+            <img src={userData ? userData.avatar_url : stamp} alt="?" className="h-full w-full rounded-lg" />
           </div>
         </div>
       </div>
